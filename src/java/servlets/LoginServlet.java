@@ -21,19 +21,29 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 
         HttpSession session = request.getSession();
 
         String logout = request.getParameter("logout");
         if (logout != null) {
             session.invalidate();
-            session = request.getSession();
+
             request.setAttribute("logoutMessage", "Logged out successfuly");
+
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 
         } else {
 
+            if (session.getAttribute("user") != null) {
+                User user = (User) session.getAttribute("user");
+                String username = user.getUsername();
+                request.setAttribute("username", username);
+                response.sendRedirect("home");
+                
+            } else {
+              getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                //response.sendRedirect("login");
+            }
         }
 
     }
@@ -53,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 
             if (user == null) {
                 request.setAttribute("errorMessage", "Username or password is not right");
-                   getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);

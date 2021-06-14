@@ -17,19 +17,19 @@
         <form method="post" action="login">
 
             <label>Username:</label>
-            <input type="text" placeholder="john" name="username"  required></input>
+            <input type="text" placeholder="john" name="username" value="${username}" required></input>
             <br>
             <br>
             <label>Password:</label>
-            <input type="password" name="password"  required >
+            <input type="password" name="password" value="${password}"  required >
             <br>
             <br>
             <input type="submit" value="login">
 
-         
+
             <p> ${errorMessage}</p>
-            
-               <p>${logoutMessage}</p>
+
+            <p>${logoutMessage}</p>
         </form>
 
 

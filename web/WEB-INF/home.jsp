@@ -12,15 +12,16 @@
         <title>Home</title>
     </head>
     <body>
-        <form method="post">
+
+        <form method="get" action="login" >
 
 
             <h1>Home</h1>
-            <h2> ${username} is logged in</h2>
+            <h2> ${user.username} is logged in</h2>
 
-            <input type="submit" value="logout">
-            
-            
+            <a href="login?logout">Logout</a>
+
+
         </form>
 
 

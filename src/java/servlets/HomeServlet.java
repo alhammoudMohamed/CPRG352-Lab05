@@ -11,25 +11,11 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String logout = request.getParameter("logout");
         HttpSession session = request.getSession();
-
-        if (logout != null) {
-            session.invalidate();
-            session = request.getSession();
-            request.setAttribute("logoutMessage", "Logged out successfuly");
-            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-
+        if (session.getAttribute("user") != null) {
+            getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
         } else {
-
-            if (session.getAttribute("user") != null) {
-                User user = (User) session.getAttribute("user");
-                String username = user.getUsername();
-                request.setAttribute("username", username);
-                getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-            } else {
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-            }
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
 
     }
