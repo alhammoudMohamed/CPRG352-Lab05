@@ -14,14 +14,14 @@
     <body>
         <h1>Login page</h1>
 
-        <form method="post" action="login">
+        <form method="post" >
 
             <label>Username:</label>
-            <input type="text" placeholder="john" name="username" value="${username}" required></input>
+            <input type="text"  name="username"  required></input>
             <br>
             <br>
             <label>Password:</label>
-            <input type="password" name="password" value="${password}"  required >
+            <input type="password" name="password"   required >
             <br>
             <br>
             <input type="submit" value="login">
